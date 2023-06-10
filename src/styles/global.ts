@@ -19,9 +19,24 @@ export const GlobalStyle = createGlobalStyle`
     font-size: 1rem;
   }
 
+  body::-webkit-scrollbar {
+        width: .4em;
+    }
+ 
+  body::-webkit-scrollbar-thumb {
+      background-color: ${(props) => props.theme['base-hover']};
+      border-radius: 4px;
+  }
+
   h1, h2, h3 {
     font-family: 'Baloo 2', sans-serif;
     color: ${(props) => props.theme['base-title']};
   }
+
+  @media (max-width: 900px) {
+        html {
+            font-size: 87.5%;
+        }
+    }
 
 `
