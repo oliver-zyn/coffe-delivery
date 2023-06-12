@@ -41,7 +41,7 @@ export const AdvantageList = styled.ul`
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
-  gap: 1.25rem;
+  gap: 1.25rem 0;
 
   li {
     display: flex;

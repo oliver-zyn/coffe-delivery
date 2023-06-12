@@ -28,7 +28,7 @@ export const GlobalStyle = createGlobalStyle`
       border-radius: 4px;
   }
 
-  h1, h2, h3 {
+  h1, h2, h3, h4 {
     font-family: 'Baloo 2', sans-serif;
     color: ${(props) => props.theme['base-title']};
   }
