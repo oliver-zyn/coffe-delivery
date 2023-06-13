@@ -4,32 +4,49 @@ import {
   CoffeFooter,
   TagsContainer,
 } from './styles'
-import coffeImg from '../../../../assets/expresso.svg'
+
 import { ShoppingCartSimple } from 'phosphor-react'
 
-export function CoffeCard() {
+interface CoffeCardProps {
+  id: string
+  imgUrl: string
+  tags: string[]
+  title: string
+  description: string
+  price: string
+}
+
+export function CoffeCard({
+  id,
+  imgUrl,
+  tags,
+  title,
+  description,
+  price,
+}: CoffeCardProps) {
   return (
     <CardContainer>
-      <img src={coffeImg} alt="café expresso" />
+      <img src={imgUrl} alt="café expresso" />
 
       <TagsContainer>
-        <span>Tradicional</span>
-        <span>Gelado</span>
+        {tags.map((tag) => {
+          return <span key={tag}>{tag}</span>
+        })}
       </TagsContainer>
 
       <CoffeDescription>
-        <h3>Expresso Tradicional</h3>
-        <p>O tradicional café feito com água quente e grãos moídos</p>
+        <h3>{title}</h3>
+        <p>{description}</p>
       </CoffeDescription>
 
       <CoffeFooter>
         <div>
           <span>R$</span>
-          <h4>9,90</h4>
+          <h4>{price}</h4>
         </div>
 
         <div>
-          <input type="number" />
+          <input type="number" min={0} max={100} />
 
           <button>
             <ShoppingCartSimple size={22} weight="fill" />
