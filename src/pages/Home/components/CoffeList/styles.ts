@@ -1,7 +1,7 @@
 import { styled } from 'styled-components'
 
 export const CoffeListContainer = styled.section`
-  margin-top: 5.875rem;
+  margin: 5.875rem 0;
 
   h2 {
     color: ${(props) => props.theme['base-subtitle']};
