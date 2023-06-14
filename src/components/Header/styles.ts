@@ -15,6 +15,14 @@ export const HeaderContainer = styled.header`
     align-items: center;
     gap: 0.75rem;
   }
+
+  > a {
+    border-radius: 6px;
+  }
+
+  > a:focus {
+    box-shadow: none;
+  }
 `
 
 export const Locale = styled.div`

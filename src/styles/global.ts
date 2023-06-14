@@ -25,12 +25,12 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body::-webkit-scrollbar {
-        width: .4em;
-    }
+    width: .4em;
+  }
  
   body::-webkit-scrollbar-thumb {
-      background-color: ${(props) => props.theme['base-hover']};
-      border-radius: 4px;
+    background-color: ${(props) => props.theme['base-hover']};
+    border-radius: 4px;
   }
 
   h1, h2, h3, h4 {
