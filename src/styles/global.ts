@@ -7,11 +7,6 @@ export const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
 
-  :focus {
-    outline: 0;
-    box-shadow: 0 0 0 2px ${(props) => props.theme['base-label']};
-  }
-
   body {
     background: ${(props) => props.theme.background};
     color: ${(props) => props.theme['base-text']};
@@ -38,10 +33,15 @@ export const GlobalStyle = createGlobalStyle`
     color: ${(props) => props.theme['base-title']};
   }
 
+  input:focus {
+    box-shadow: none;
+    outline: 1px solid ${(props) => props.theme['yellow-dark']};
+  }
+
   @media (max-width: 900px) {
-        html {
-            font-size: 87.5%;
-        }
+    html {
+        font-size: 87.5%;
     }
+  }
 
 `

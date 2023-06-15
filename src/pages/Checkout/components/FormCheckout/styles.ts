@@ -58,11 +58,6 @@ export const FormBody = styled.div`
     color: 1px solid ${(props) => props.theme['base-text']};
   }
 
-  input:focus {
-    box-shadow: none;
-    outline: 1px solid ${(props) => props.theme['yellow-dark']};
-  }
-
   div.adressFirst {
     display: flex;
     position: relative;
@@ -90,20 +85,17 @@ export const FormBody = styled.div`
   div.adressSecond {
     display: grid;
     grid-gap: 0 0.75rem;
-    grid-template-columns: 3fr 3fr 1fr;
+    grid-template-columns: 2.55fr 3fr 1fr;
 
     input#district {
-      grid-column: 1;
       width: 100%;
     }
 
     input#city {
-      grid-column: 2;
       width: 100%;
     }
 
     input#uf {
-      grid-column: 3;
       width: 100%;
     }
   }
@@ -114,7 +106,25 @@ export const FormBody = styled.div`
     }
 
     div.adressSecond {
-      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-columns: 3fr 1fr;
+      grid-template-areas:
+        'dist dist'
+        'city uf';
+
+      input#district {
+        grid-area: dist;
+        width: 100%;
+      }
+
+      input#city {
+        grid-area: city;
+        width: 100%;
+      }
+
+      input#uf {
+        grid-area: uf;
+        width: 100%;
+      }
     }
   }
 `
@@ -132,7 +142,21 @@ export const PaymentBody = styled.div`
 
   div {
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  @media (max-width: 900px) {
+    div {
+      flex-direction: column;
+
+      button {
+        flex: 1;
+        width: 100%;
+        justify-content: center;
+      }
+    }
   }
 `
 
@@ -151,7 +175,18 @@ export const RadioBox = styled.button`
   border-radius: 6px;
   border: 0;
 
+  cursor: pointer;
+  transition: background 0.1s;
+
   svg {
     color: ${(props) => props.theme.purple};
+  }
+
+  &:focus {
+    box-shadow: none;
+  }
+
+  &:hover {
+    background: ${(props) => props.theme['base-hover']};
   }
 `

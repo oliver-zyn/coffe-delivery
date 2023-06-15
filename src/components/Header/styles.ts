@@ -22,6 +22,7 @@ export const HeaderContainer = styled.header`
 
   > a:focus {
     box-shadow: none;
+    outline: none;
   }
 `
 
@@ -72,5 +73,9 @@ export const ShoppingCartStyle = styled.button<ShoppingCartStyleProps>`
     position: absolute;
     top: -8px;
     right: -8px;
+  }
+
+  &:focus {
+    outline: 1px solid ${(props) => props.theme['yellow-dark']};
   }
 `

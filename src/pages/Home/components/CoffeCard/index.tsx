@@ -26,7 +26,7 @@ export function CoffeCard({
 }: CoffeCardProps) {
   return (
     <CardContainer>
-      <img src={imgUrl} alt="café expresso" />
+      <img src={imgUrl} alt={title} />
 
       <TagsContainer>
         {tags.map((tag) => {
@@ -46,7 +46,7 @@ export function CoffeCard({
         </div>
 
         <div>
-          <input type="number" min={0} max={100} />
+          <input type="number" min={0} max={100} placeholder="0" />
 
           <button>
             <ShoppingCartSimple size={22} weight="fill" />

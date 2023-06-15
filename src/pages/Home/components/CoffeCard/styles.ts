@@ -106,5 +106,16 @@ export const CoffeFooter = styled.div`
 
     border-radius: 6px;
     border: 0;
+
+    cursor: pointer;
+    transition: background 0.1s;
+
+    &:hover {
+      background: ${(props) => props.theme.purple};
+    }
+
+    &:focus {
+      outline: 1px solid ${(props) => props.theme.purple};
+    }
   }
 `

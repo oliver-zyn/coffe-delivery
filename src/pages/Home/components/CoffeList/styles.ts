@@ -15,4 +15,13 @@ export const CoffeListContainer = styled.section`
     gap: 2.5rem 2rem;
     grid-template-columns: repeat(auto-fit, minmax(256px, 1fr));
   }
+
+  @media (max-width: 900px) {
+    h2 {
+      text-align: center;
+    }
+    > div {
+      justify-items: center;
+    }
+  }
 `
