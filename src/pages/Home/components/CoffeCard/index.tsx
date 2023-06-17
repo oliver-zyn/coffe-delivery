@@ -1,3 +1,4 @@
+import { useContext, useState } from 'react'
 import {
   CardContainer,
   CoffeDescription,
@@ -6,6 +7,7 @@ import {
 } from './styles'
 
 import { ShoppingCartSimple } from 'phosphor-react'
+import { ShoppingCartContext } from '../../../../contexts/ShoppingCart'
 
 interface CoffeCardProps {
   id: string
@@ -24,6 +26,18 @@ export function CoffeCard({
   description,
   price,
 }: CoffeCardProps) {
+  const { addCoffeToCart } = useContext(ShoppingCartContext)
+
+  const [quantity, setQuantity] = useState(0)
+
+  function handleAddCoffeToCart() {
+    if (quantity <= 0) {
+      alert('A quantidade deve ser maior que 0!')
+    } else {
+      addCoffeToCart({ id, imgUrl, tags, title, description, price, quantity })
+    }
+  }
+
   return (
     <CardContainer>
       <img src={imgUrl} alt={title} />
@@ -46,9 +60,15 @@ export function CoffeCard({
         </div>
 
         <div>
-          <input type="number" min={0} max={100} placeholder="0" />
+          <input
+            type="number"
+            min={1}
+            max={100}
+            placeholder="0"
+            onChange={(e) => setQuantity(Number(e.target.value))}
+          />
 
-          <button>
+          <button type="submit" onClick={handleAddCoffeToCart}>
             <ShoppingCartSimple size={22} weight="fill" />
           </button>
         </div>
