@@ -1,6 +1,6 @@
 # Coffe Delivery
 
-<img src="https://github.com/oliver-zyn/ignite-timer/assets/89222905/fc7f6213-e57e-4829-bb72-9c586f74b406" width="600" />
+<img src="https://github.com/oliver-zyn/coffe-delivery/assets/89222905/27ff58d4-3b1c-4f09-837c-3e62d983e819" width="600" />
 
 ## 📖 Sobre
 
