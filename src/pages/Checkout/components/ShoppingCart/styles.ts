@@ -16,6 +16,14 @@ export const ShoppingCartContainer = styled.section`
     padding: 2.5rem;
     border-radius: 6px 36px;
 
+    div.noItemsInCart {
+      text-align: center;
+      font-size: ${(props) => props.theme['text-s']};
+      color: ${(props) => props.theme['base-text']};
+      padding: 1.5rem 0;
+      border-bottom: 1px solid ${(props) => props.theme['base-button']};
+    }
+
     div.totalPrice {
       display: flex;
       flex-direction: column;
@@ -56,7 +64,12 @@ export const ShoppingCartContainer = styled.section`
         cursor: pointer;
         transition: background 0.1s;
 
-        &:hover {
+        &:disabled {
+          opacity: 0.7;
+          cursor: not-allowed;
+        }
+
+        &:hover:not(:disabled) {
           background: ${(props) => props.theme['yellow-dark']};
         }
 

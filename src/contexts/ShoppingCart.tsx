@@ -6,7 +6,7 @@ interface ShoppingCartType {
   tags: string[]
   title: string
   description: string
-  price: string
+  price: number
   quantity: number
 }
 
@@ -17,6 +17,8 @@ interface ShoppingCartContextProviderProps {
 interface ShoppingCartContextType {
   shoppingCart: ShoppingCartType[]
   addCoffeToCart: (coffe: ShoppingCartType) => void
+  removeCoffeFromCart: (id: string) => void
+  updateQuantityCart: (id: string, quantity: number) => void
 }
 
 export const ShoppingCartContext = createContext({} as ShoppingCartContextType)
@@ -41,12 +43,31 @@ export function ShoppingCartContextProvider({
       )
       setShoppingCart(newShoppingCart)
     }
+  }
 
-    console.log(shoppingCart)
+  function removeCoffeFromCart(id: string) {
+    const newShoppingCart = shoppingCart.filter(
+      (coffeCart) => coffeCart.id !== id,
+    )
+    setShoppingCart(newShoppingCart)
+  }
+
+  function updateQuantityCart(id: string, quantity: number) {
+    const newShoppingCart = shoppingCart.map((coffeCart) =>
+      coffeCart.id === id ? { ...coffeCart, quantity } : coffeCart,
+    )
+    setShoppingCart(newShoppingCart)
   }
 
   return (
-    <ShoppingCartContext.Provider value={{ shoppingCart, addCoffeToCart }}>
+    <ShoppingCartContext.Provider
+      value={{
+        shoppingCart,
+        addCoffeToCart,
+        removeCoffeFromCart,
+        updateQuantityCart,
+      }}
+    >
       {children}
     </ShoppingCartContext.Provider>
   )

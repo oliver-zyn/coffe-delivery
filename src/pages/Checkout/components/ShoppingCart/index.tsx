@@ -1,34 +1,46 @@
 import { ShoppingCartContainer } from './styles'
 
-import imgExpresso from '../../../../assets/expresso.svg'
-import imgAmericano from '../../../../assets/americano.svg'
 import { CartItem } from '../CartItem'
 import { useNavigate } from 'react-router-dom'
-
-const coffeList = [
-  {
-    id: crypto.randomUUID(),
-    imgUrl: imgExpresso,
-    tags: ['Tradicional'],
-    title: 'Expresso Tradicional',
-    description: 'O tradicional café feito com água quente e grãos moídos',
-    price: '9,90',
-  },
-  {
-    id: crypto.randomUUID(),
-    imgUrl: imgAmericano,
-    tags: ['Tradicional'],
-    title: 'Expresso Americano',
-    description: 'Expresso diluído, menos intenso que o tradicional',
-    price: '9,90',
-  },
-]
+import { useContext } from 'react'
+import { ShoppingCartContext } from '../../../../contexts/ShoppingCart'
+import { formatNumberToReal } from '../../../../utils/formatNumberToReal'
+import { FormCheckoutContext } from '../../../../contexts/FormCheckout'
 
 export function ShoppingCart() {
   const navigate = useNavigate()
 
+  const { shoppingCart, updateQuantityCart } = useContext(ShoppingCartContext)
+  const { formCheckout, isFormCheckoutValid } = useContext(FormCheckoutContext)
+
   function handleConfirmDelivery() {
-    navigate('/success')
+    console.log(formCheckout)
+
+    if (!isFormCheckoutValid()) {
+      alert('Preencha todos os campos!')
+    } else {
+      navigate('/success')
+    }
+  }
+
+  function handleUpdateQuantityCart(id: string, currentQuantity: number) {
+    updateQuantityCart(id, currentQuantity)
+  }
+
+  function calculateFreight() {
+    const freight = shoppingCart.reduce((acc, { quantity }) => {
+      return acc + quantity
+    }, 0)
+
+    return freight + shoppingCart.length
+  }
+
+  function calculatePriceItems(freight = 0) {
+    const price = shoppingCart.reduce((acc, { price, quantity }) => {
+      return acc + price * quantity + freight
+    }, 0)
+
+    return price
   }
 
   return (
@@ -37,34 +49,49 @@ export function ShoppingCart() {
 
       <section>
         <div>
-          {coffeList.map(({ id, imgUrl, title, price }) => {
-            return (
-              <CartItem
-                key={id}
-                id={id}
-                imgUrl={imgUrl}
-                title={title}
-                price={price}
-              />
-            )
-          })}
+          {shoppingCart.length === 0 ? (
+            <div className="noItemsInCart">
+              Você ainda não adicionou nenhum item ao carrinho
+            </div>
+          ) : (
+            shoppingCart.map(({ id, imgUrl, title, price, quantity }) => {
+              return (
+                <CartItem
+                  key={id}
+                  id={id}
+                  imgUrl={imgUrl}
+                  title={title}
+                  price={price}
+                  quantity={quantity}
+                  handleUpdateQuantityCart={handleUpdateQuantityCart}
+                />
+              )
+            })
+          )}
         </div>
 
         <div className="totalPrice">
           <div>
             <span>Total de itens</span>
-            <span>R$ 29,70</span>
+            <span>R$ {formatNumberToReal(calculatePriceItems())}</span>
           </div>
           <div>
             <span>Entrega</span>
-            <span>R$ 3,50</span>
+            <span>R$ {formatNumberToReal(calculateFreight())}</span>
           </div>
           <div className="total">
             <span>Total</span>
-            <span>R$ 33,20</span>
+            <span>
+              R$ {formatNumberToReal(calculatePriceItems(calculateFreight()))}
+            </span>
           </div>
 
-          <button onClick={handleConfirmDelivery}>Confirmar pedido</button>
+          <button
+            onClick={handleConfirmDelivery}
+            disabled={shoppingCart.length === 0}
+          >
+            Confirmar pedido
+          </button>
         </div>
       </section>
     </ShoppingCartContainer>

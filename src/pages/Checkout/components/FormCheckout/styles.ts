@@ -160,20 +160,28 @@ export const PaymentBody = styled.div`
   }
 `
 
-export const RadioBox = styled.button`
+interface RadioBoxProps {
+  $isActive: boolean
+}
+
+export const RadioBox = styled.button<RadioBoxProps>`
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  background: ${(props) => props.theme['base-button']};
+  background: ${(props) =>
+    props.$isActive ? props.theme['purple-light'] : props.theme['base-button']};
+
   padding: 1rem 1.25rem;
-  min-width: 11.125rem;
+  min-width: 11rem;
 
   font-size: ${(props) => props.theme['button-m']};
   color: ${(props) => props.theme['base-text']};
   text-transform: uppercase;
 
   border-radius: 6px;
-  border: 0;
+  border: 1px solid
+    ${(props) =>
+      props.$isActive ? props.theme.purple : props.theme['base-button']};
 
   cursor: pointer;
   transition: background 0.1s;
@@ -187,6 +195,9 @@ export const RadioBox = styled.button`
   }
 
   &:hover {
-    background: ${(props) => props.theme['base-hover']};
+    background: ${(props) =>
+      props.$isActive
+        ? props.theme['purple-light']
+        : props.theme['base-hover']};
   }
 `

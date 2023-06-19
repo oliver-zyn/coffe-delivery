@@ -62,7 +62,7 @@ export const ShoppingCartStyle = styled.button<ShoppingCartStyleProps>`
     width: 1.25rem;
     height: 1.25rem;
     border-radius: 9999px;
-    display: flex;
+    display: ${(props) => (props.cartquantity === 0 ? 'none' : 'flex')};
     justify-content: center;
     align-items: center;
 

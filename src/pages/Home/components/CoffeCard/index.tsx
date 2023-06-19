@@ -8,6 +8,7 @@ import {
 
 import { ShoppingCartSimple } from 'phosphor-react'
 import { ShoppingCartContext } from '../../../../contexts/ShoppingCart'
+import { formatNumberToReal } from '../../../../utils/formatNumberToReal'
 
 interface CoffeCardProps {
   id: string
@@ -15,7 +16,7 @@ interface CoffeCardProps {
   tags: string[]
   title: string
   description: string
-  price: string
+  price: number
 }
 
 export function CoffeCard({
@@ -56,16 +57,20 @@ export function CoffeCard({
       <CoffeFooter>
         <div>
           <span>R$</span>
-          <h4>{price}</h4>
+          <h4>{formatNumberToReal(price)}</h4>
         </div>
 
         <div>
           <input
             type="number"
-            min={1}
-            max={100}
             placeholder="0"
-            onChange={(e) => setQuantity(Number(e.target.value))}
+            value={quantity}
+            onChange={(e) => {
+              const value = Number(e.target.value)
+              if (value >= 0 && value <= 100) {
+                setQuantity(value)
+              }
+            }}
           />
 
           <button type="submit" onClick={handleAddCoffeToCart}>
