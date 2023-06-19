@@ -8,8 +8,12 @@ import {
 } from './styles'
 
 import successImage from '../../assets/successImage.png'
+import { useContext } from 'react'
+import { FormCheckoutContext } from '../../contexts/FormCheckout'
 
 export function Success() {
+  const { formCheckout } = useContext(FormCheckoutContext)
+
   return (
     <SuccessContainer>
       <h1>Uhu! Pedido confirmado</h1>
@@ -22,9 +26,14 @@ export function Success() {
           </AdressIcon>
           <TextInfo>
             <p>
-              Entrega em <strong>Rua João Daniel Martinelli, 102</strong>
+              Entrega em{' '}
+              <strong>
+                {formCheckout.street}, {formCheckout.num}
+              </strong>
             </p>
-            <p>Farrapos - Porto Alegre, RS</p>
+            <p>
+              {formCheckout.district} - {formCheckout.city}, {formCheckout.uf}
+            </p>
           </TextInfo>
         </span>
         <span>
@@ -45,7 +54,7 @@ export function Success() {
           <TextInfo>
             <p>Pagamento na entrega</p>
             <p>
-              <strong>Cartão de Crédito</strong>
+              <strong>{formCheckout.payment}</strong>
             </p>
           </TextInfo>
         </span>

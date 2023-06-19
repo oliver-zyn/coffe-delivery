@@ -7,18 +7,22 @@ import { ShoppingCartContext } from '../../../../contexts/ShoppingCart'
 import { formatNumberToReal } from '../../../../utils/formatNumberToReal'
 import { FormCheckoutContext } from '../../../../contexts/FormCheckout'
 
+import { ToastContainer, toast } from 'react-toastify'
+
+import 'react-toastify/dist/ReactToastify.css'
+
 export function ShoppingCart() {
   const navigate = useNavigate()
 
-  const { shoppingCart, updateQuantityCart } = useContext(ShoppingCartContext)
-  const { formCheckout, isFormCheckoutValid } = useContext(FormCheckoutContext)
+  const { shoppingCart, updateQuantityCart, resetShoppingCart } =
+    useContext(ShoppingCartContext)
+  const { isFormCheckoutValid } = useContext(FormCheckoutContext)
 
   function handleConfirmDelivery() {
-    console.log(formCheckout)
-
     if (!isFormCheckoutValid()) {
-      alert('Preencha todos os campos!')
+      toast.warning('Preencha todos os campos!')
     } else {
+      resetShoppingCart()
       navigate('/success')
     }
   }
@@ -37,10 +41,10 @@ export function ShoppingCart() {
 
   function calculatePriceItems(freight = 0) {
     const price = shoppingCart.reduce((acc, { price, quantity }) => {
-      return acc + price * quantity + freight
+      return acc + price * quantity
     }, 0)
 
-    return price
+    return price + freight
   }
 
   return (
@@ -94,6 +98,19 @@ export function ShoppingCart() {
           </button>
         </div>
       </section>
+
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </ShoppingCartContainer>
   )
 }

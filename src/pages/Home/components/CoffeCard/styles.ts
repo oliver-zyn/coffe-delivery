@@ -21,6 +21,10 @@ export const CardContainer = styled.div`
     font-weight: 700;
     color: ${(props) => props.theme['base-subtitle']};
   }
+
+  div.alert > div {
+    box-shadow: 0px 0px 5px 0px #e5e5e5;
+  }
 `
 
 export const TagsContainer = styled.div`
@@ -61,31 +65,55 @@ export const CoffeFooter = styled.div`
   margin-top: 2.06rem;
   gap: 1.4rem;
 
-  div:first-child {
+  div.price {
     gap: 0.25rem;
     display: flex;
     line-height: 0.1;
   }
 
-  div:first-child span {
+  div.price span {
     font-size: ${(props) => props.theme['text-s']};
     color: ${(props) => props.theme['base-text']};
     align-self: flex-end;
   }
 
-  div:first-child h4 {
+  div.price h4 {
     font-size: ${(props) => props.theme['title-m']};
     color: ${(props) => props.theme['base-text']};
     font-weight: 800;
   }
 
-  div:last-child {
+  div.quantity {
+    user-select: none;
     display: flex;
     align-items: center;
     gap: 0.5rem;
   }
 
-  div:last-child input {
+  div.quantity > div {
+    position: relative;
+  }
+
+  div.quantity > div span {
+    position: absolute;
+    top: 0.75rem;
+    cursor: pointer;
+    color: ${(props) => props.theme.purple};
+  }
+
+  div.quantity > div span:hover {
+    color: ${(props) => props.theme['purple-dark']};
+  }
+
+  div.quantity span.sub {
+    left: 0.5rem;
+  }
+
+  div.quantity span.add {
+    right: 0.5rem;
+  }
+
+  div.quantity > div input {
     max-width: 4.5rem;
     min-height: 2.375rem;
     background: ${(props) => props.theme['base-button']};
@@ -96,7 +124,7 @@ export const CoffeFooter = styled.div`
     text-align: center;
   }
 
-  div:last-child button {
+  div.quantity button {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -110,12 +138,17 @@ export const CoffeFooter = styled.div`
     cursor: pointer;
     transition: background 0.1s;
 
-    &:hover {
+    &:hover:not(:disabled) {
       background: ${(props) => props.theme.purple};
     }
 
     &:focus {
       outline: 1px solid ${(props) => props.theme.purple};
+    }
+
+    &:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
     }
   }
 `

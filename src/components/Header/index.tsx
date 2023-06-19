@@ -19,7 +19,7 @@ export function Header() {
       <div>
         <Locale>
           <MapPin size={22} weight="fill" />
-          Porto Alegre, RS
+          Pato Branco, PR
         </Locale>
 
         <NavLink to="/checkout" title="Checkout">

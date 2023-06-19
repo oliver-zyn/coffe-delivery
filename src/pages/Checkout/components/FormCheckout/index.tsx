@@ -130,24 +130,24 @@ export function FormCheckout() {
         <PaymentBody>
           <div>
             <RadioBox
-              $isActive={paymentType === 'credit'}
-              onClick={() => handleSelectPaymentType('credit')}
+              $isActive={paymentType === 'Cartão de Crédito'}
+              onClick={() => handleSelectPaymentType('Cartão de Crédito')}
             >
               <CreditCard size={16} />
               Cartão de crédito
             </RadioBox>
 
             <RadioBox
-              $isActive={paymentType === 'debt'}
-              onClick={() => handleSelectPaymentType('debt')}
+              $isActive={paymentType === 'Cartão de Débito'}
+              onClick={() => handleSelectPaymentType('Cartão de Débito')}
             >
               <Bank size={16} />
               Cartão de débito
             </RadioBox>
 
             <RadioBox
-              $isActive={paymentType === 'money'}
-              onClick={() => handleSelectPaymentType('money')}
+              $isActive={paymentType === 'Dinheiro'}
+              onClick={() => handleSelectPaymentType('Dinheiro')}
             >
               <Money size={16} />
               Dinheiro

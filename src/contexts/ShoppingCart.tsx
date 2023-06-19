@@ -19,6 +19,7 @@ interface ShoppingCartContextType {
   addCoffeToCart: (coffe: ShoppingCartType) => void
   removeCoffeFromCart: (id: string) => void
   updateQuantityCart: (id: string, quantity: number) => void
+  resetShoppingCart: () => void
 }
 
 export const ShoppingCartContext = createContext({} as ShoppingCartContextType)
@@ -59,6 +60,10 @@ export function ShoppingCartContextProvider({
     setShoppingCart(newShoppingCart)
   }
 
+  function resetShoppingCart() {
+    setShoppingCart([])
+  }
+
   return (
     <ShoppingCartContext.Provider
       value={{
@@ -66,6 +71,7 @@ export function ShoppingCartContextProvider({
         addCoffeToCart,
         removeCoffeFromCart,
         updateQuantityCart,
+        resetShoppingCart,
       }}
     >
       {children}

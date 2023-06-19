@@ -16,7 +16,7 @@ export const CartItemContainer = styled.div`
     max-width: 4rem;
   }
 
-  div {
+  > div {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
@@ -29,6 +29,30 @@ export const CartItemContainer = styled.div`
       grid-area: title;
       font-size: ${(props) => props.theme['text-m']};
       color: ${(props) => props.theme['base-subtitle']};
+    }
+
+    div {
+      user-select: none;
+      position: relative;
+
+      span {
+        position: absolute;
+        top: 0.6rem;
+        cursor: pointer;
+        color: ${(props) => props.theme.purple};
+      }
+
+      span:hover {
+        color: ${(props) => props.theme['purple-dark']};
+      }
+
+      span.sub {
+        left: 0.5rem;
+      }
+
+      span.add {
+        right: 0.5rem;
+      }
     }
 
     input {
@@ -73,7 +97,7 @@ export const CartItemContainer = styled.div`
     }
   }
 
-  span {
+  > span {
     align-self: flex-start;
     margin-left: 1.875rem;
     font-size: ${(props) => props.theme['text-m']};

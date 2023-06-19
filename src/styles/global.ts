@@ -38,10 +38,18 @@ export const GlobalStyle = createGlobalStyle`
     outline: 1px solid ${(props) => props.theme['yellow-dark']};
   }
 
+  input[type=number]::-webkit-inner-spin-button { 
+    -webkit-appearance: none;
+  }
+
+  input[type=number] { 
+    -moz-appearance: textfield;
+    appearance: textfield;
+  }
+
   @media (max-width: 900px) {
     html {
         font-size: 87.5%;
     }
   }
-
 `
